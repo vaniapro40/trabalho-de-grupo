@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-image: url(./img/imapas.jpg);
+            background-size: contain;
+            background-attachment: fixed;
+        }
+
+        .overlay-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px); /* Ajuste o nível de blur conforme desejado */
+            z-index: -1; 
+            background-color: rgb(255, 255, 255, 0.6);
+        }
+
+        .main {
+            height: auto;
+        }
+        
+        .cabeca {
+            position: fixed;
+            top: 0;
+            height: auto;
+            z-index: +1;
+        }
+        
+        .cabecalho {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: +1;
+            backdrop-filter: blur(5px);
+            background-color: rgb(255, 255, 255, 0.1);
+        }
+        
+        .cabecalho h1 {
+            margin-left: 5%;
+        }
+        
+        .cabecalho h1 {
+            margin-left: 5%;
+        }
+        
+        .navegador {
+            margin-right: 10%;
+            display: flex;
+            align-items: center;
+            position: relative; /* Necessário para o submenu ser posicionado corretamente */
+        }
+        
+        .navegador a {
+            text-decoration: none;
+            margin-left: 40px;
+            color: black;
+            display: inline-block;
+            transition: transform 0.7s ease;
+        }
+        
+        .navegador a:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Estilo para o menu suspenso */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%; /* Coloca o submenu abaixo do link Menu */
+            left: 0;
+            background: transparent;
+            border: 0.5px solid #c5c5c5;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            z-index: 1000;
+        }
+        
+        .submenu a {
+            color: black;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .submenu a:hover {
+            background: transparent;
+        }
+        
+        /* Exibir o submenu quando passar o mouse sobre o contêiner .navegador */
+        .navegador:hover .submenu {
+            display: block;
+        }
+        
+        
+        
+        .cabecalho .navegador a:hover {
+            transform: scale(1.2);
+            transition: 0.7s ease;
+        }
+
+        .navegador #unique {
+            border-bottom: solid 2px rgb(236, 150, 36);
+        }
+        
+        .cabecalho .navegador a:hover {
+            transform: scale(1.2);
+            transition: 0.7s ease;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 100px;
+            align-items: center;
+        }
+
+        .produtos {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 10px;
+        }
+
+        .piteu {
+            background-color: rgb(255, 255, 255, 0.3);
+            height: auto;
+            border-radius: 30px;
+            backdrop-filter: blur(6px);
+            padding: 20px; 
+            display: inline-block;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* sombra igual em todos os lados */
+
+        }
+
+
+        .food{
+            width: 90%;
+            height: auto;
+            display: block;
+            margin: auto;
+            border-radius: 500px;
+        }
+        
+        .strela img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (max-width:1200px) {
+            .produtos {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width:900px) {
+            .produtos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width:670px) {
+            .produtos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Footer com integração à identidade visual do corpo da página */
+        footer {
+            color: #f4f4f4; /* Texto claro para contraste */
+            padding: 10px 0;
+            font-family: Arial, sans-serif;
+            backdrop-filter: blur(5px); /* Efeito de desfoque no fundo */
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-container div {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-about h3, .footer-links h4, .footer-contact h4, .footer-social h4, .footer-newsletter h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #fa801c; /* Cor de destaque que combina com o corpo da página */
+        }
+
+        .footer-about p {
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: black;
+        }
+
+        .footer-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-links ul li {
+            margin: 8px 0;
+        }
+
+        .footer-links ul li a {
+            color: #160d0d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            transform: scale(1.03);
+            color: #fa801c;
+        }
+
+        .footer-contact p {
+            font-size: 0.9em;
+            margin: 5px 0;
+            color: black;
+        }
+
+        .footer-social a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-social img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social img:hover {
+            transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+        }
+
+        .footer-newsletter form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-newsletter input[type="email"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            flex-grow: 1;
+            background-color: #f4f4f4; /* Fundo claro para contraste */
+            color: #333;
+        }
+
+        .footer-newsletter button {
+            padding: 8px 16px;
+            background-color: #f4a261;
+            border: none;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-newsletter button:hover {
+            background-color: #e76f51;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.8em;
+            color: #eee7e7;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-newsletter form {
+                flex-direction: column;
+            }
+
+            .footer-newsletter button {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-blur"></div>
+        <section class="main">
+            <div class="cabeca">
+                <section class="cabecalho">
+                    <h1>Pastelaria Nós Sabor</h1>
+
+                    <div class="navegador">
+                        <a href=""><img src="img/magnifying-glass (3).png" alt=""></a>
+                        <a href="index.html">Home</a>
+                        <a href="#" id="unique">Menu</a>
+                        <div class="submenu">
+                            <a href="para si.html" onclick="saveLinkAndRedirect(event, 'para si.html')">Para Sí</a>
+                            <a href="bolos.html" onclick="saveLinkAndRedirect(event, 'bolos.html')">Bolos</a>
+                            <a href="opcoes do dia.html" onclick="saveLinkAndRedirect(event, 'opcoes do dia.html')">Opções do dia</a>
+                        </div>
+                        <a href="about.html">About</a>
+                        <a href=""><img src="img/carts.png" alt=""></a>
+                    </div>
+
+                </section>
+            </div>
+        </section>
+        <section class="menu">
+            <h1><span>Opções  de</span> Menu</h1>
+
+        </section>
+        <section class="produtos">
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+            <div class="piteu">
+                <img src="img/gonzaga.jpg" class="food" alt="comida">
+                <div class="strela">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                    <img src="img/star (2).png" alt="">
+                </div>
+                <br> <br><h2>Para sí</h2>
+                <p>O melhor da pastelaria, só para você.<br>
+                    Opções frescas e personalizadas para todos os momentos
+                    Escolha o sabor que combina com você.</p>
+                
+            </div>
+        </section>
+    <script>
+
+    </script>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Pastelaria Nós Sabor</h3>
+                <p>A melhor pastelaria online, com sabores exclusivos feitos com carinho e tradição.</p>
+            </div>
+    
+            <div class="footer-links">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="about.html">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="acesso.html">Administradores</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p>Endereço: Rua Exemplo, nº 123</p>
+                <p>Telefone: (xx) xxxx-xxxx</p>
+                <p>Email: contato@nossabor.com</p>
+            </div>
+    
+            <div class="footer-social">
+                <h4>Conecte-se</h4>
+                <a href="https://instagram.com"><img src="img/instagram (3).png" alt="Instagram"></a>
+                <a href="https://facebook.com"><img src="img/facebook (4).png" alt="Facebook"></a>
+                <a href="https://wa.me"><img src="img/whatsapp.png" alt="WhatsApp"></a>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Receba nossas novidades</h4>
+                <form action="#">
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <button type="submit">Inscrever</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pastelaria Nós Sabor. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

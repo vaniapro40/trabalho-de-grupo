@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto</title>
+    
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            height: 100vh;
+            background-image: url(./img/imapas.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .overlay-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            z-index: -1;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .main {
+            height: auto;
+        }
+
+        .cabeca {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: auto;
+            z-index: +1;
+        }
+
+        .cabecalho {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: +1;
+            backdrop-filter: blur(5px);
+            background-color: rgb(255, 255, 255, 0.1);
+        }
+
+        .cabecalho h1 {
+            margin-left: 5%;
+        }
+
+        .navegador {
+            margin-right: 10%;
+            display: flex;
+            align-items: center;
+            position: relative; /* Necessário para o submenu ser posicionado corretamente */
+        }
+        
+        .navegador a {
+            text-decoration: none;
+            margin-left: 40px;
+            color: black;
+            display: inline-block;
+            transition: transform 0.7s ease;
+        }
+        
+        .navegador a:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Estilo para o menu suspenso */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%; /* Coloca o submenu abaixo do link Menu */
+            left: 0;
+            background: transparent;
+            border: 0.5px solid #c5c5c5;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            min-width: 200px;
+            z-index: 1000;
+        }
+        
+        .submenu a {
+            color: black;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .submenu a:hover {
+            background: transparent;
+        }
+        
+        /* Exibir o submenu quando passar o mouse sobre o contêiner .navegador */
+        .navegador:hover .submenu {
+            display: block;
+        }
+        .navegador #unique {
+            border-bottom: solid 2px rgb(236, 150, 36);
+        }
+
+        .cabecalho .navegador a:hover {
+            transform: scale(1.2);
+            transition: 0.7s ease;
+        }
+
+        .form-container {
+            background: transparent;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 290px;
+            text-align: center;
+            margin-top: 100px;
+            backdrop-filter: blur(7px);
+            background-color: rgb(255, 255, 255, 0.3);
+        }
+
+        .form-container input, .form-container textarea, .form-container button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: transparent;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(5, 1);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%; /* Define a largura da lista */
+            height: auto; /* Altura fixa para o contêiner da lista */
+            overflow-y: auto; /* Adiciona rolagem quando a altura máxima é ultrapassada */
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .product-item {
+            background: #fff;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            width: 40%;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-blur"></div>
+    <section class="main">
+        <div class="cabeca">
+            <section class="cabecalho">
+                <h1>Pastelaria Nós Sabor</h1>
+                <div class="navegador">
+                    <a href=""><img src="img/magnifying-glass (3).png" alt=""></a>
+                    <a href="index.html">Home</a>
+                    <a href="#">Menu</a>
+                    <div class="submenu">
+                        <a href="para si.html" onclick="saveLinkAndRedirect(event, 'para si.html')">Para Sí</a>
+                        <a href="bolos.html" onclick="saveLinkAndRedirect(event, 'bolos.html')">Bolos</a>
+                        <a href="opcoes do dia.html" onclick="saveLinkAndRedirect(event, 'opcoes do dia.html')">Opções do dia</a>
+                    </div>
+                    <a href="about.html" id="unique">About</a>
+                    <a href=""><img src="img/carts.png" alt=""></a>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div class="form-container">
+        <h2>Adicionar Produto</h2>
+        <input type="file" id="productImage" accept="image/*">
+        <input type="text" id="productName" placeholder="Nome do Produto">
+        <input type="text" id="productPrice" placeholder="Preço do Produto">
+        <textarea id="productDescription" placeholder="Descrição do Produto"></textarea>
+        <button onclick="addProduct()">Adicionar Produto</button>
+    </div>
+
+    <div class="product-list" id="productList"></div>
+
+    <script>
+        function loadProducts() {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            products.forEach((product, index) => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                const img = document.createElement('img');
+                img.src = product.image;
+                productItem.appendChild(img);
+                const name = document.createElement('h3');
+                name.textContent = product.name;
+                productItem.appendChild(name);
+                const price = document.createElement('p');
+                price.textContent = `Preço: ${product.price}`;
+                productItem.appendChild(price);
+                const description = document.createElement('p');
+                description.textContent = product.description;
+                productItem.appendChild(description);
+    
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remover';
+                removeButton.onclick = function () {
+                    removeProduct(index);
+                };
+                productItem.appendChild(removeButton);
+    
+                productList.appendChild(productItem);
+            });
+        }
+    
+        function addProduct() {
+            const productImage = document.getElementById('productImage').files[0];
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPrice').value;
+            const productDescription = document.getElementById('productDescription').value;
+    
+            if (productImage && productName && productPrice && productDescription) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const newProduct = {
+                        image: e.target.result,
+                        name: productName,
+                        price: productPrice,
+                        description: productDescription
+                    };
+    
+                    const products = JSON.parse(localStorage.getItem('products')) || [];
+                    products.push(newProduct);
+                    localStorage.setItem('products', JSON.stringify(products));
+    
+                    document.getElementById('productImage').value = '';
+                    document.getElementById('productName').value = '';
+                    document.getElementById('productPrice').value = '';
+                    document.getElementById('productDescription').value = '';
+    
+                    loadProducts();
+                };
+                reader.readAsDataURL(productImage);
+            } else {
+                alert('Por favor, preencha todos os campos e selecione uma imagem.');
+            }
+        }
+    
+        function removeProduct(index) {
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            products.splice(index, 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            loadProducts();
+        }
+    
+        loadProducts();
+    </script>
+</body>
+</html>

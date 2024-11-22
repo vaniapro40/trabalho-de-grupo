@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(./img/gelado.jpg);
+            background-size: contain; /* Manter o estilo original da imagem de fundo */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Usar Flexbox para centralizar o conteúdo */
+            justify-content: center; /* Alinha o conteúdo horizontalmente */
+            align-items: center; /* Alinha o conteúdo verticalmente */
+            height: 100vh; /* Garante que o corpo ocupe toda a altura da tela */
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: transparent;
+            backdrop-filter: blur(7px);
+            border: solid 0.5px rgb(143, 143, 143);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.9);
+        }
+        
+        label {
+            color: white;
+        }
+
+        input {
+            border: none; /* Remove todas as bordas */
+            border-bottom: 1px solid #bbbbbb; /* Borda inferior */
+            outline: none; /* Remove o contorno ao focar */
+            padding: 10px; /* Adiciona um padding */
+            width: 94%; /* Define a largura do input */
+            margin-bottom: 10px; /* Margem inferior */
+            font-size: 16px; /* Tamanho da fonte */
+            background: transparent;
+            backdrop-filter: blur(3px);
+            color: white;
+        }
+        
+        /* Adiciona um efeito ao focar no campo */
+        input:focus {
+            border-bottom: 1px solid #0056b3; /* Muda a cor da borda inferior ao focar */
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            background-color: #1270d4;
+            color: white;
+            padding: 10px;
+            border: none;
+            margin-bottom: 5px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .cadastro a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .cadastro {
+            background-color: green;
+        }
+
+        #error-message {
+            color: red;
+            text-align: center;
+        }
+
+        .register-link {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .register-link:hover {
+            transform: scale(1.03);
+        }
+
+        .register-link h5 {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Cadastrar</h1>
+        <form id="loginForm">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" required>
+            <label for="morada">Morada</label>
+            <input type="text" id="morada" required>
+            <button type="submit">Entrar</button>
+        </form>
+        
+    </div>
+
+    
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        
+            const username = document.getElementById('username').value;
+            const morada = document.getElementById('morada').value;
+        
+            if (username && morada) {
+                const previousPage = sessionStorage.getItem('previousPage');
+                if (previousPage) {
+                    window.location.href = previousPage; // Redireciona para a página selecionada
+                } else {
+                    window.location.href = 'index.html'; // Caso não tenha página, vai para a home
+                }
+            } else {
+                alert("Preencha todos os campos!");
+            }
+        });
+    </script>
+    
+</body>
+</html>

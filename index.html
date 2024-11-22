@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Pastelaria Nós Sabor</title>
+
+    <script defer>
+        function saveLinkAndRedirect(event, pageUrl) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            console.log("Redirecionando para: " + pageUrl); // Verifica se o código está sendo executado
+            sessionStorage.setItem('previousPage', pageUrl); // Salva o link
+            window.location.href = 'login.html'; // Redireciona para a página de login
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="overlay-blur"></div>
+    <section class="main">
+        <div class="cabeca">
+            <section class="cabecalho">
+                <h1>Pastelaria Nós Sabor</h1>
+
+                <div class="navegador">
+                    <a href=""><img src="img/magnifying-glass (3).png" alt=""></a>
+                    <a href="index.html" id="unique">Home</a>
+                    <a href="#" >Menu</a>
+                    <div class="submenu">
+                        <a href="para si.html" onclick="saveLinkAndRedirect(event, 'para si.html')">Para Sí</a>
+                        <a href="bolos.html" onclick="saveLinkAndRedirect(event, 'bolos.html')">Bolos</a>
+                        <a href="opcoes do dia.html" onclick="saveLinkAndRedirect(event, 'opcoes do dia.html')">Opções do dia</a>
+                    </div>
+                    <a href="about.html" onclick="saveLinkAndRedirect(event, 'about.html')">About</a>
+                    <a href="carts.html" onclick="saveLinkAndRedirect(event, 'carts.html')"><img src="img/carts.png" alt=""></a>
+                </div>
+            </section>
+        </div>
+        <section class="menu">
+            <div class="mi_menu">
+                <h2>Delicious Food Is Waiting For You</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Eaque velit optio necessitatibus, ullam ipsa sint quasi
+                    ducimus dolore repellat dolorum ipsam eveniet quo deserunt
+                    magni deleniti. Maiores nam sed obcaecati?</p>
+                <div class="botoes">
+                    <button><a href="">Food menu</a></button>
+                    <button><a href="">Food table</a></button>
+                </div>
+            </div>
+            <img src="img/sobremesa.jpg" alt="piteu do dia">
+        </section>
+
+        <section class="listas">
+            <h1>Top List</h1>
+            <p>Our mainstay menu</p>
+            <div class="piteus">
+                <div class="piteu">
+                    <img src="img/gonzaga.jpg" class="food" alt="comida">
+                    <div class="strela">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                    </div>
+                    <br> <br><h2>Para sí</h2>
+                    <p>O melhor da pastelaria, só para você.<br>
+                        Opções frescas e personalizadas para todos os momentos
+                        Escolha o sabor que combina com você.</p>
+                        <a href="para si.html" class="align-right" onclick="saveLinkAndRedirect(event, 'para si.html')"><img src="img/add (2).png" alt=""></a>
+                </div>
+                <div class="piteu">
+                    <img src="img/drip cake.jpg" class="food" alt="comida">
+                    <div class="strela">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                    </div>
+                    <h2>Bolos</h2>
+                    <p>Datas comemorativas</p>
+                    <a href="bolos.html" class="align-right" onclick="saveLinkAndRedirect(event, 'bolos.html')"><img src="img/add (2).png" alt=""></a>
+                </div>
+                <div class="piteu">
+                    <img src="img/823e96a21e5b23097a26e981a31f999e.jpg" class="food" alt="comida">
+                    <div class="strela">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                        <img src="img/star (2).png" alt="">
+                    </div>
+                    <h2>Opções do dia</h2>
+                    <p>A opção perfeita para o seu dia
+                        escolha, saboreie e se apaixone delícias feitas para o seu gosto.</p>
+                    <a href="opcoes do dia.html" class="align-right" onclick="saveLinkAndRedirect(event, 'opcoes do dia.html')"><img src="img/add (2).png" alt=""></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="salgados">
+            <img src="img/ff068dc63cc3947ffc7685cbdf16f70f.jpg" alt="saldinho">
+            <div>
+                <h1>Best Potators For French Fries</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus,
+                    illum modi exercitationem fuga itaque nam quas cupiditate aliquam
+                    dolorum repellat facilis repudiandae, aliquid ullam delectus, ipsam natus.
+                    Impedit, est vel?</p>
+            </div>
+        </section>
+    </section>
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Pastelaria Nós Sabor</h3>
+                <p>A melhor pastelaria online, com sabores exclusivos feitos com carinho e tradição.</p>
+            </div>
+    
+            <div class="footer-links">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="about.html">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="acesso.html">Administradores</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p>Endereço: Rua Exemplo, nº 123</p>
+                <p>Telefone: (xx) xxxx-xxxx</p>
+                <p>Email: contato@nossabor.com</p>
+            </div>
+    
+            <div class="footer-social">
+                <h4>Conecte-se</h4>
+                <a href="https://instagram.com"><img src="img/instagram (3).png" alt="Instagram"></a>
+                <a href="https://facebook.com"><img src="img/facebook (4).png" alt="Facebook"></a>
+                <a href="https://wa.me"><img src="img/whatsapp.png" alt="WhatsApp"></a>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Receba nossas novidades</h4>
+                <form action="#">
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <button type="submit">Inscrever</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2024 Pastelaria Nós Sabor. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function saveLinkAndRedirect(event, pageUrl) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            sessionStorage.setItem('previousPage', pageUrl); // Salva o link
+            window.location.href = 'login.html'; // Redireciona para a página de login
+        }
+
+    </script>
+
+</body>
+</html>
